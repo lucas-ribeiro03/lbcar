@@ -1,0 +1,49 @@
+$main-color: #1c1c1c; // Fundo principal, menus, rodapé
+$secondary-color: #b0b0b0; // Títulos, ícones, bordas
+$highlights-color: #d72638; // Botões de ação, destaques
+$details-color: #ffffff; // Fundos claros, áreas de leitura
+$text-color: #3a3a3a; // Textos e descrições
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.cardsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+  margin-top: 3rem;
+
+  svg {
+    width: 100px;
+    height: 100px;
+    fill: #d72638;
+  }
+
+  .card {
+    color: #fff;
+    max-width: 350px;
+    height: 280px;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-radius: 8px;
+
+    .title {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .content {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+  }
+}

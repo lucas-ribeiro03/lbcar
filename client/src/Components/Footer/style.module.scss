@@ -1,0 +1,73 @@
+.footerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #d72638;
+  margin-top: 3rem;
+
+  .leftFooterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 250px;
+    }
+  }
+
+  .rightFooterContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 2rem;
+    color: #fff;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .institucional,
+    .veiculos,
+    .atendimento {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #fff;
+      }
+    }
+
+    .atendimento span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.2rem;
+
+      svg {
+        font-size: 1.2rem;
+      }
+    }
+    .social {
+      display: flex;
+      gap: 1.3rem;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      margin-bottom: 0.7rem;
+      svg {
+        background-color: #1c1c1c;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 50%;
+        transition: 0.4s;
+
+        &:hover {
+          scale: 1.2;
+          fill: #d72638;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.container {
+  background: #1c1c1c;
+  padding: 2rem;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+
+  select {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.7rem;
+    margin-left: 0.7rem;
+    outline: none;
+    height: fit-content;
+  }
+
+  .filters {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+
+    .filterContainer {
+      background-color: #b0b0b0;
+      color: #d72638;
+      font-weight: 500;
+      font-size: 1.2rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      min-width: fit-content;
+      width: 35%;
+    }
+  }
+}

@@ -1,0 +1,132 @@
+.body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.container {
+  width: 600px;
+  height: 400px;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  color: #fff;
+  padding: 1rem 1.5rem;
+
+  .containerHeaderWrapper {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    line-height: 0.7rem;
+
+    .signUpBtn {
+      text-decoration: none;
+      color: #0c5dc7;
+      background-color: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .mainContainer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .inputBox {
+        position: relative;
+
+        .eyeButton {
+          position: absolute;
+          right: 0.4rem;
+          top: 15%;
+          font-size: 1.3rem;
+          fill: #000;
+          cursor: pointer;
+        }
+      }
+
+      label {
+        display: block;
+        margin-left: 0.7rem;
+        margin-bottom: 0.3rem;
+        cursor: pointer;
+      }
+
+      input {
+        margin-bottom: 0.8rem;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1.2rem;
+        padding: 0.3rem 0.8rem;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #c1c1c1;
+      }
+
+      button {
+        padding: 0.5rem 1rem;
+        background-color: #d72638;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        transition: 0.5s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #eb172d;
+        }
+      }
+    }
+  }
+  span {
+    font-size: 1.2rem;
+  }
+
+  .googleBtn {
+    background-color: #fff;
+    width: 200px;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    gap: 0.7rem;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .googleBtn:hover .googleIcon {
+    animation: spinGoogle 0.9s;
+  }
+}
+
+@keyframes spinGoogle {
+  0% {
+    transform: rotate(0deg);
+    scale: 1.5;
+  }
+
+  50% {
+    scale: 1.3;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    scale: 1;
+  }
+}

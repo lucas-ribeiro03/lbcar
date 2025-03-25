@@ -1,0 +1,64 @@
+$main-color: #1c1c1c; // Fundo principal, menus, rodapé
+$secondary-color: #b0b0b0; // Títulos, ícones, bordas
+$highlights-color: #d72638; // Botões de ação, destaques
+$details-color: #ffffff; // Fundos claros, áreas de leitura
+$text-color: #3a3a3a; // Textos e descrições
+
+.navbarContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $main-color;
+  height: 120px;
+  align-items: center;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+    padding: 0 5rem;
+
+    .leftContainer {
+      margin-left: 5rem;
+    }
+
+    img {
+      width: 150px;
+    }
+
+    .rightContainer {
+      display: flex;
+
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 2.5rem;
+
+        li a {
+          text-decoration: none;
+          color: $highlights-color;
+          font-size: 1.2rem;
+          transition: 0.4s;
+
+          &:hover {
+            color: $details-color;
+          }
+        }
+        button {
+          color: $highlights-color;
+          font-size: 1.2rem;
+          transition: 0.4s;
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          &:hover {
+            color: $details-color;
+          }
+        }
+      }
+    }
+  }
+}

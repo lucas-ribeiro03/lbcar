@@ -1,0 +1,154 @@
+.menuForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-left: 1rem;
+
+  .selectContainer {
+    display: flex;
+    flex-direction: column;
+
+    select {
+      width: 10rem;
+      font-size: 1rem;
+      padding: 0.3rem 1rem;
+      outline: none;
+
+      option {
+        width: 10rem;
+        font-size: 1rem;
+        padding: 0.3rem 1rem;
+      }
+    }
+  }
+}
+
+.container {
+  background: #1c1c1c;
+  color: #fff;
+  margin-right: 0.3rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  width: 80%;
+
+  .priceFilterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    span {
+      color: #fff;
+    }
+  }
+
+  .sliderContainer {
+    position: relative;
+    width: 100%;
+  }
+
+  .slider {
+    position: relative;
+    height: 6px;
+    background-color: #ddd;
+    border-radius: 3px;
+  }
+
+  .sliderTrack {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background-color: #ddd;
+    border-radius: 3px;
+    z-index: 1;
+  }
+
+  .sliderRange {
+    position: absolute;
+    height: 6px;
+    background-color: #d72638;
+    border-radius: 3px;
+    z-index: 2;
+  }
+
+  input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 3;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    pointer-events: all;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #d72638;
+    border: 1px solid #fff;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    pointer-events: all;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #d72638;
+    border: 1p solid #fff;
+    cursor: pointer;
+  }
+
+  .thumbLeft {
+    z-index: 3;
+    left: -3px;
+  }
+
+  .thumbRight {
+    z-index: 4;
+  }
+
+  .priceValues {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.colorFilterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.checkContainer input {
+  display: none;
+
+  + label::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.6rem;
+  }
+}
+
+.checkContainer input:checked + label:before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='15' height='15' viewBox='0 0 30 30'%3E%3Cpath d='M 26.980469 5.9902344 A 1.0001 1.0001 0 0 0 26.292969 6.2929688 L 11 21.585938 L 4.7070312 15.292969 A 1.0001 1.0001 0 1 0 3.2929688 16.707031 L 10.292969 23.707031 A 1.0001 1.0001 0 0 0 11.707031 23.707031 L 27.707031 7.7070312 A 1.0001 1.0001 0 0 0 26.980469 5.9902344 z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.gearShiftContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
