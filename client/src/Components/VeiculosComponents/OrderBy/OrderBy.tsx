@@ -17,7 +17,7 @@ export const OrderBy: React.FC = () => {
     { label: "Marca", value: filter.selectedBrand },
     { label: "Ano", value: filter.selectedYear },
     { label: "Situação", value: filter.selectedSituation },
-    { label: "Câmbio", value: filter.selectedGearShift },
+    { label: "Câmbio", value: filter.selectedGearshift },
     {
       label: "Preço",
       value: `R$ ${Number(filter.priceRange.minPrice)
