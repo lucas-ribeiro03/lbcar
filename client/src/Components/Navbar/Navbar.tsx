@@ -15,6 +15,7 @@ export const Navbar: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  console.log(login);
 
   useEffect(() => {
     if (token) {
@@ -62,7 +63,7 @@ export const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => {
-                  if (!login) {
+                  if (login) {
                     navigate("/venda-seu-veiculo");
                   } else {
                     toast.warn("Você precisa estar logado");
