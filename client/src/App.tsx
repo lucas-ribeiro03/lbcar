@@ -9,6 +9,7 @@ import { Login } from "./pages/Login/Login";
 import { User } from "./pages/User/User";
 import { About } from "./pages/About/About";
 import { Footer } from "./Components/Footer/Footer";
+import { SellVehicle } from "./pages/SellVehicle/SellVehicle";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
             <Routes>
               <Route path="" element={<Home />} />
               <Route path="/veiculos" element={<Vehicles />} />
-              <Route path="/login" element={<Login />} />;
+              <Route path="/login" element={<Login />} />
               <Route path="/perfil" element={<User />} />
               <Route path="/about" element={<About />} />
+              <Route path="/venda-seu-veiculo" element={<SellVehicle />} />
             </Routes>
             <Footer />
           </Router>
