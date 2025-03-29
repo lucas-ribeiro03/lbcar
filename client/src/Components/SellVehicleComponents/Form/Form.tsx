@@ -22,12 +22,12 @@ export const Form: React.FC = () => {
 
   console.log(errors);
 
-  const handleCpf = (valor: string) => {
+  const handleValidateCpf = (valor: string) => {
+    const cpfRecebido = valor.replace(/[^\d]/g, "").slice(0, 9);
     const firstDigit = () => {
-      const cpfResultado = valor.replace(/[^\d]/g, "");
-      const cpf = Array.from(cpfResultado).slice(0, 9);
-      console.log(cpf);
-      const cpfIndex = cpf.reverse().map((numeros, index) => {
+      const cpfArray = Array.from(cpfRecebido).slice(0, 9);
+
+      const cpfIndex = cpfArray.reverse().map((numeros, index) => {
         const constantes = index + 2;
         const valores = Number(numeros) * constantes;
         return valores;
@@ -41,21 +41,19 @@ export const Form: React.FC = () => {
     };
 
     const secondDigit = () => {
-      const cpfResultado = valor.replace(/[^\d]/g, "");
+      const cpfRecebido = valor.replace(/[^\d]/g, "");
 
-      const cpf = Array.from(cpfResultado).slice(0, 9);
+      const cpfArray = Array.from(cpfRecebido).slice(0, 9);
 
       const primeiroDigito = firstDigit();
 
-      cpf.push(primeiroDigito);
-      console.log(cpf);
-      const cpfIndex = cpf.reverse().map((numeros, index) => {
+      cpfArray.push(primeiroDigito);
+
+      const cpfIndex = cpfArray.reverse().map((numeros, index) => {
         const constantes = index + 2;
         const valores = Number(numeros) * constantes;
         return valores;
       });
-
-      console.log(cpfIndex);
 
       const soma = cpfIndex.reduce((num, acumulador) => {
         return (acumulador += num);
@@ -66,13 +64,23 @@ export const Form: React.FC = () => {
     };
     const primeiroDigito = firstDigit();
     const segundoDigito = secondDigit();
-    console.log(primeiroDigito);
-    console.log(segundoDigito);
+
+    const fullCpf = cpfRecebido + primeiroDigito + segundoDigito;
+
+    const formatCPF = (value: string) => {
+      return value
+        .replace(/\D/g, "") // Remove tudo que não for número
+        .replace(/(\d{3})(\d)/, "$1.$2") // Coloca o primeiro ponto
+        .replace(/(\d{3})(\d)/, "$1.$2") // Coloca o segundo ponto
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca o traço
+    };
+
+    return formatCPF(fullCpf);
   };
 
   const onSubmit = (data: FormData) => {
     console.log("Dados enviados:", data);
-    handleCpf(data.cpf);
+    handleValidateCpf(data.cpf);
   };
 
   const formatPhone = (value: string) => {
