@@ -22,8 +22,57 @@ export const Form: React.FC = () => {
 
   console.log(errors);
 
+  const handleCpf = (valor: string) => {
+    const firstDigit = () => {
+      const cpfResultado = valor.replace(/[^\d]/g, "");
+      const cpf = Array.from(cpfResultado).slice(0, 9);
+      console.log(cpf);
+      const cpfIndex = cpf.reverse().map((numeros, index) => {
+        const constantes = index + 2;
+        const valores = Number(numeros) * constantes;
+        return valores;
+      });
+
+      const soma = cpfIndex.reduce((num, acumulador) => {
+        return (acumulador += num);
+      }, 0);
+      const primeiroDigito = 11 - (soma % 11);
+      return String(primeiroDigito);
+    };
+
+    const secondDigit = () => {
+      const cpfResultado = valor.replace(/[^\d]/g, "");
+
+      const cpf = Array.from(cpfResultado).slice(0, 9);
+
+      const primeiroDigito = firstDigit();
+
+      cpf.push(primeiroDigito);
+      console.log(cpf);
+      const cpfIndex = cpf.reverse().map((numeros, index) => {
+        const constantes = index + 2;
+        const valores = Number(numeros) * constantes;
+        return valores;
+      });
+
+      console.log(cpfIndex);
+
+      const soma = cpfIndex.reduce((num, acumulador) => {
+        return (acumulador += num);
+      });
+
+      const segundoDigito = 11 - (soma % 11);
+      return segundoDigito;
+    };
+    const primeiroDigito = firstDigit();
+    const segundoDigito = secondDigit();
+    console.log(primeiroDigito);
+    console.log(segundoDigito);
+  };
+
   const onSubmit = (data: FormData) => {
     console.log("Dados enviados:", data);
+    handleCpf(data.cpf);
   };
 
   const formatPhone = (value: string) => {
