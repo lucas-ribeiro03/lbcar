@@ -17,59 +17,10 @@ export const Form: React.FC = () => {
     register,
     handleSubmit,
     setValue,
-    setError,
     formState: { errors },
   } = useForm<FormData>();
 
   console.log(errors);
-  const handleValidateCpf = (valor: string) => {
-    const cpfLimpo = valor.replace(/[^\d]/g, "");
-    if (cpfLimpo.length < 11) return "Cpf inválido";
-
-    const firstDigit = () => {
-      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
-
-      const cpfIndex = cpfArray.reverse().map((numeros, index) => {
-        const constantes = index + 2;
-        const valores = Number(numeros) * constantes;
-        return valores;
-      });
-
-      const soma = cpfIndex.reduce((num, acumulador) => {
-        return (acumulador += num);
-      }, 0);
-      const primeiroDigito = 11 - (soma % 11);
-      return String(primeiroDigito);
-    };
-
-    const secondDigit = () => {
-      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
-
-      const primeiroDigito = firstDigit();
-
-      cpfArray.push(primeiroDigito);
-
-      const cpfIndex = cpfArray.reverse().map((numeros, index) => {
-        const constantes = index + 2;
-        const valores = Number(numeros) * constantes;
-        return valores;
-      });
-
-      const soma = cpfIndex.reduce((num, acumulador) => {
-        return (acumulador += num);
-      });
-
-      const segundoDigito = 11 - (soma % 11);
-      return segundoDigito;
-    };
-    const primeiroDigito = firstDigit();
-    const segundoDigito = secondDigit();
-    if (primeiroDigito + segundoDigito === cpfLimpo.slice(9)) {
-      console.log("cpf válido");
-    } else {
-      console.log("cpf inválido");
-    }
-  };
 
   const onSubmit = async (data: FormData) => {
     console.log("dados enviados", data);
