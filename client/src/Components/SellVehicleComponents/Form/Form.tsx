@@ -17,15 +17,17 @@ export const Form: React.FC = () => {
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<FormData>();
 
   console.log(errors);
-
   const handleValidateCpf = (valor: string) => {
-    const cpfRecebido = valor.replace(/[^\d]/g, "").slice(0, 9);
+    const cpfLimpo = valor.replace(/[^\d]/g, "");
+    if (cpfLimpo.length < 11) return "Cpf inválido";
+
     const firstDigit = () => {
-      const cpfArray = Array.from(cpfRecebido).slice(0, 9);
+      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
 
       const cpfIndex = cpfArray.reverse().map((numeros, index) => {
         const constantes = index + 2;
@@ -41,9 +43,7 @@ export const Form: React.FC = () => {
     };
 
     const secondDigit = () => {
-      const cpfRecebido = valor.replace(/[^\d]/g, "");
-
-      const cpfArray = Array.from(cpfRecebido).slice(0, 9);
+      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
 
       const primeiroDigito = firstDigit();
 
@@ -64,23 +64,15 @@ export const Form: React.FC = () => {
     };
     const primeiroDigito = firstDigit();
     const segundoDigito = secondDigit();
-
-    const fullCpf = cpfRecebido + primeiroDigito + segundoDigito;
-
-    const formatCPF = (value: string) => {
-      return value
-        .replace(/\D/g, "") // Remove tudo que não for número
-        .replace(/(\d{3})(\d)/, "$1.$2") // Coloca o primeiro ponto
-        .replace(/(\d{3})(\d)/, "$1.$2") // Coloca o segundo ponto
-        .replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca o traço
-    };
-
-    return formatCPF(fullCpf);
+    if (primeiroDigito + segundoDigito === cpfLimpo.slice(9)) {
+      console.log("cpf válido");
+    } else {
+      console.log("cpf inválido");
+    }
   };
 
-  const onSubmit = (data: FormData) => {
-    console.log("Dados enviados:", data);
-    handleValidateCpf(data.cpf);
+  const onSubmit = async (data: FormData) => {
+    console.log("dados enviados", data);
   };
 
   const formatPhone = (value: string) => {
@@ -96,6 +88,7 @@ export const Form: React.FC = () => {
   };
 
   const formatCPF = (value: string) => {
+    console.log("formtando");
     return value
       .replace(/\D/g, "") // Remove tudo que não for número
       .replace(/(\d{3})(\d)/, "$1.$2") // Coloca o primeiro ponto
@@ -129,15 +122,76 @@ export const Form: React.FC = () => {
                 type="text"
                 id="cpf"
                 maxLength={14}
-                {...register("cpf", { required: true })}
-                onChange={(e) =>
-                  setValue("cpf", formatCPF(e.target.value), {
+                {...register("cpf", {
+                  required: true,
+                  validate: (value) => {
+                    const cpfLimpo = value.replace(/[^\d]/g, "");
+                    if (cpfLimpo.length < 11) return "Cpf inválido";
+                    const firstDigit = () => {
+                      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
+
+                      const cpfIndex = cpfArray
+                        .reverse()
+                        .map((numeros, index) => {
+                          const constantes = index + 2;
+                          const valores = Number(numeros) * constantes;
+                          return valores;
+                        });
+
+                      const soma = cpfIndex.reduce((num, acumulador) => {
+                        return (acumulador += num);
+                      }, 0);
+                      const primeiroDigito = 11 - (soma % 11);
+                      return String(primeiroDigito);
+                    };
+
+                    const secondDigit = () => {
+                      const cpfArray = Array.from(cpfLimpo).slice(0, 9);
+
+                      const primeiroDigito = firstDigit();
+
+                      cpfArray.push(primeiroDigito);
+
+                      const cpfIndex = cpfArray
+                        .reverse()
+                        .map((numeros, index) => {
+                          const constantes = index + 2;
+                          const valores = Number(numeros) * constantes;
+                          return valores;
+                        });
+
+                      const soma = cpfIndex.reduce((num, acumulador) => {
+                        return (acumulador += num);
+                      });
+
+                      const segundoDigito = 11 - (soma % 11);
+                      return segundoDigito;
+                    };
+
+                    const primeiroDigito = firstDigit();
+                    const segundoDigito = secondDigit();
+
+                    if (primeiroDigito + segundoDigito === cpfLimpo.slice(9)) {
+                      return true;
+                    } else {
+                      return "Cpf inválido";
+                    }
+                  },
+                })}
+                onBlur={(e) => {
+                  const formattedCpf = formatCPF(e.target.value);
+                  setValue("cpf", formattedCpf, {
                     shouldValidate: true,
-                  })
-                }
+                  });
+                }}
               />
+
               {errors?.cpf?.type === "required" && (
                 <div className={styles.errorMessage}>Campo obrigatório</div>
+              )}
+
+              {errors?.cpf?.type === "manual" && (
+                <div className={styles.errorMessage}>Cpf inválido</div>
               )}
             </div>
 
@@ -148,11 +202,9 @@ export const Form: React.FC = () => {
                 id="whatsapp"
                 maxLength={14}
                 {...register("whatsapp", { required: true })}
-                onChange={(e) =>
-                  setValue("whatsapp", formatPhone(e.target.value), {
-                    shouldValidate: true,
-                  })
-                }
+                onBlur={(e) => {
+                  setValue("whatsapp", formatPhone(e.target.value));
+                }}
               />
               {errors?.whatsapp?.type === "required" && (
                 <div className={styles.errorMessage}>Campo obrigatório</div>
