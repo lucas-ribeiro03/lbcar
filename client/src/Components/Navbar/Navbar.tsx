@@ -15,7 +15,6 @@ export const Navbar: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  console.log(login);
 
   useEffect(() => {
     if (token) {
