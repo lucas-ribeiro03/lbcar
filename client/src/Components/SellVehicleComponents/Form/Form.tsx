@@ -22,6 +22,11 @@ export const Form: React.FC = () => {
 
   console.log(errors);
 
+  const userLogged = JSON.parse(localStorage.getItem("user") || "null");
+  const userValues = Object.values(userLogged);
+  const userId = userValues[0];
+  console.log(userId);
+
   const onSubmit = async (data: FormData) => {
     console.log("dados enviados", data);
   };
@@ -57,6 +62,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-1" }}>
               <label htmlFor="nome">Nome completo *</label>
               <input
+                placeholder="Seu nome completo"
                 type="text"
                 id="nome"
                 maxLength={40}
@@ -70,9 +76,10 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-2" }}>
               <label htmlFor="email">CPF *</label>
               <input
+                placeholder="somente os numeros (11122233345)"
                 type="text"
                 id="cpf"
-                maxLength={14}
+                maxLength={11}
                 {...register("cpf", {
                   required: true,
                   validate: (value) => {
@@ -141,7 +148,7 @@ export const Form: React.FC = () => {
                 <div className={styles.errorMessage}>Campo obrigatório</div>
               )}
 
-              {errors?.cpf?.type === "manual" && (
+              {errors?.cpf?.type === "validate" && (
                 <div className={styles.errorMessage}>Cpf inválido</div>
               )}
             </div>
@@ -149,6 +156,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-3" }}>
               <label htmlFor="whatsapp">Whatsapp *</label>
               <input
+                placeholder="Seu numero de telefone"
                 type="text"
                 id="whatsapp"
                 maxLength={14}
@@ -165,6 +173,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-4" }}>
               <label htmlFor="marca">Marca do veículo *</label>
               <input
+                placeholder="Nome da marca"
                 type="text"
                 id="marca"
                 {...register("marca", { required: true })}
@@ -177,6 +186,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-5" }}>
               <label htmlFor="modelo">Modelo do veículo *</label>
               <input
+                placeholder="Nome do modelo"
                 type="text"
                 id="modelo"
                 {...register("modelo", { required: true })}
@@ -189,6 +199,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-6" }}>
               <label htmlFor="ano">Ano do veículo *</label>
               <input
+                placeholder="Ano de fabricação do veiculo"
                 type="text"
                 id="ano"
                 {...register("ano", { required: true })}
@@ -201,6 +212,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-7" }}>
               <label htmlFor="cor">Cor do veículo *</label>
               <input
+                placeholder="Cor"
                 type="text"
                 id="cor"
                 {...register("cor", { required: true })}
@@ -213,6 +225,7 @@ export const Form: React.FC = () => {
             <div className={styles.inputBox} style={{ gridArea: "box-8" }}>
               <label htmlFor="valor">Valor pedido *</label>
               <input
+                placeholder="Valor pedido na venda"
                 type="text"
                 id="valor"
                 {...register("valor", { required: true })}
